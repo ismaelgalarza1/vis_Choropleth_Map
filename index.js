@@ -53,8 +53,13 @@ createMap = () =>{
             .on('mouseover', (countyDataItems) =>{
                 tooltip.transition()
                         .style('visibility', 'visible')
-            }
-            )
+                         let id = countyDataItems['id']
+                 let county = educationData.find((items) => {
+                    return items['fips'] === id
+                })  
+                tooltip.text(county['fips'] + ' | ' + county['area_name'] + ' | ' + county['state'] + ' : ' + county['bachelorsOrHigher'] + ' % ')
+                tooltip.attr('data-education', county['bachelorsOrHigher'] )       
+            })
             .on('mouseout', (countyDataItems) => {
                 tooltip.transition()
                         .style('visibility', 'hidden')

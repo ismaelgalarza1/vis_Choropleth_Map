@@ -2,17 +2,36 @@
 
 body {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
+    gap:12px;
+}
+.main-container{
+    justify-content: center;
+    align-items: center;
+    min-width: 500px;
+    min-height: 200px;
+    margin-top: 5%;
+}
+.container-svg{
+    align-items: center;
+    background-color: rgb(219, 218, 218);
+    gap: 50px;
+    
+}
+#title{
+    margin-left: 25%;
+    margin-bottom: 5%;
 }
 
 #canvas {
     min-width: 1000px;
     min-height: 600px;
+    background-color: rgb(219, 218, 218);
 }
 #tooltip{
-    height: auto;
-    width: auto;
+    height: 40px;
+    width: 400px;
     visibility: hidden;
 }
