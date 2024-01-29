@@ -12,10 +12,9 @@ let padding = 60;
 //create the canvas 
 
 let canvas = d3.select('#canvas')
+let tooltip = d3.select('#tooltip')
 
-
-
-//create the map for county and US
+//create the map for county and US. us geopath function (https://d3js.org/d3-geo/path)
 createMap = () =>{
     canvas.selectAll('path')
             .data(countyData)
@@ -23,6 +22,43 @@ createMap = () =>{
             .append('path')
             .attr('d', d3.geoPath())
             .attr('class', 'county')
+            .attr('fill', (countyDataItems)=> {
+                let id = countyDataItems['id']
+                let county = educationData.find((items) =>{
+                    return items['fips'] === id
+                })
+                let percentage = county['bachelorsOrHigher']
+                if(percentage <= 15){
+                    return 'red'
+                }else if (percentage <= 30){
+                    return 'orange'
+                }else if (percentage <= 45){
+                    return 'lightgreen'
+                }else {
+                    return 'green'
+                }
+
+            })
+            .attr('data-fips', (countyDataItems)=> {
+                return countyDataItems['id']
+            })
+            .attr('data-education',(countyDataItems) =>{
+                let id = countyDataItems['id']
+                 let county = educationData.find((items) =>{
+                    return items['fips'] === id
+                })
+                let percentage = county['bachelorsOrHigher']
+                return percentage
+            }) 
+            .on('mouseover', (countyDataItems) =>{
+                tooltip.transition()
+                        .style('visibility', 'visible')
+            }
+            )
+            .on('mouseout', (countyDataItems) => {
+                tooltip.transition()
+                        .style('visibility', 'hidden')
+            })
 
 
 
