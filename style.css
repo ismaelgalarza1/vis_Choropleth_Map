@@ -1,0 +1,8 @@
+/* add a base background, height, and width */
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
